@@ -29,3 +29,24 @@ export interface AvailabilityInterface {
   ShowPublic: boolean;
   ResourceAvailabilities: any;
 }
+
+export type InputFieldProps = {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  type?: React.HTMLInputTypeAttribute;
+  placeholder?: string;
+  required?: boolean;
+  error?: string;
+  autoComplete?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+};
+
+export type CustomerFormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+};

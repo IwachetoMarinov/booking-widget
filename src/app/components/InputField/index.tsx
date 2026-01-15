@@ -1,19 +1,5 @@
-"use client";
 import React from "react";
-
-type InputFieldProps = {
-  label: string;
-  name: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  type?: React.HTMLInputTypeAttribute;
-  placeholder?: string;
-  required?: boolean;
-  error?: string;
-  autoComplete?: string;
-  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
-};
+import { InputFieldProps } from "@/src/app/types";
 
 export const InputField: React.FC<InputFieldProps> = ({
   label,
@@ -31,9 +17,9 @@ export const InputField: React.FC<InputFieldProps> = ({
   const id = `field-${name}`;
 
   return (
-    <div style={{ marginBottom: 14 }}>
-      <label htmlFor={id} style={{ display: "block", fontWeight: 600 }}>
-        {label} {required ? <span aria-hidden="true">*</span> : null}
+    <div className="mb-4">
+      <label htmlFor={id} className="block text-sm font-medium text-slate-700">
+        {label} {required ? <span className="text-red-600">*</span> : null}
       </label>
 
       <input
@@ -49,23 +35,19 @@ export const InputField: React.FC<InputFieldProps> = ({
         inputMode={inputMode}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
-        style={{
-          width: "100%",
-          padding: "10px 12px",
-          borderRadius: 10,
-          border: error ? "1px solid #d00" : "1px solid #ccc",
-          outline: "none",
-          marginTop: 6,
-        }}
+        className={[
+          "mt-1 w-full rounded-xl border bg-white px-3 py-2 text-sm text-slate-900",
+          "placeholder:text-slate-400 focus:outline-none focus:ring-2",
+          error
+            ? "border-red-500 focus:ring-red-200"
+            : "border-slate-300 focus:border-slate-400 focus:ring-slate-200",
+        ].join(" ")}
       />
 
       {error ? (
-        <div
-          id={`${id}-error`}
-          style={{ marginTop: 6, color: "#d00", fontSize: 13 }}
-        >
+        <p id={`${id}-error`} className="mt-1 text-xs text-red-600">
           {error}
-        </div>
+        </p>
       ) : null}
     </div>
   );
