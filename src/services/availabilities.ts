@@ -11,15 +11,15 @@ export const caclulateSlotAvailabilities = (
   try {
     if (!availabilities?.length) return [];
 
-    const mappedAvailabilities = availabilities.map((a) => {
-      return {
-        staffId: a.Staff?.Id,
-        start: a.StartDateTime,
-        end: a.EndDateTime,
-      };
-    });
+    // const mappedAvailabilities = availabilities.map((a) => {
+    //   return {
+    //     staffId: a.Staff?.Id,
+    //     start: a.StartDateTime,
+    //     end: a.EndDateTime,
+    //   };
+    // });
 
-    console.log("mappedAvailabilities:", mappedAvailabilities);
+    // console.log("mappedAvailabilities:", mappedAvailabilities);
 
     const seenHours = new Set<string>();
     const slots: SlotAvailability[] = [];

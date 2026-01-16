@@ -54,7 +54,7 @@ export type CustomerFormValues = {
 
 export interface CreateBookingInterface {
   customerId: number;
-  selectedSlot: string;
+  selectedSlot: SlotAvailability;
   treatmentId: number;
   siteId: number;
   selectedDate: string;
@@ -68,3 +68,26 @@ export type SlotAvailability = {
     end: string; // ISO string (UTC)
   };
 };
+
+export interface BookingInterface {
+  Id: number;
+  Status: string;
+  StartDateTime: string;
+  EndDateTime: string;
+  StaffId: number;
+  ClientId: string;
+  SessionTypeId: number;
+  LocationId: number;
+  Notes: string | null;
+  GenderPreference: string;
+  Duration: number;
+  ProviderId: string;
+  StaffRequested: boolean;
+  FirstAppointment: boolean;
+  IsWaitlist: boolean;
+  WaitlistEntryId: number | null;
+  ClientServiceId: number | null;
+  Resources: any;
+  AddOns: any;
+  OnlineDescription: string;
+}

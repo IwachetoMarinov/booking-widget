@@ -2,13 +2,27 @@ import { createBooking } from "@/src/lib/mindbody";
 
 export async function POST(request: Request) {
   try {
-    const { customerId, selectedSlot, treatmentId, siteId, selectedDate, duration } =
-      await request.json();
+    const {
+      customerId,
+      selectedSlot,
+      treatmentId,
+      siteId,
+      selectedDate,
+      duration,
+    } = await request.json();
 
-    if (!customerId || !selectedSlot || !treatmentId || !siteId || !selectedDate || !duration) {
+    if (
+      !customerId ||
+      !selectedSlot ||
+      !treatmentId ||
+      !siteId ||
+      !selectedDate ||
+      !duration
+    ) {
       return new Response(
         JSON.stringify({
-          error: "Missing customerId, selectedSlot, treatmentId, siteId, selectedDate, or duration",
+          error:
+            "Missing customerId, selectedSlot, treatmentId, siteId, selectedDate, or duration",
         }),
         { status: 400 }
       );
@@ -23,11 +37,16 @@ export async function POST(request: Request) {
       duration,
     });
 
-    console.log("API create booking", response);
-
-    return new Response(JSON.stringify(response || {}), {
-      status: 200,
-    });
+    return new Response(
+      JSON.stringify(
+        response || {
+          error: "Failed to create booking",
+        }
+      ),
+      {
+        status: 200,
+      }
+    );
   } catch (error) {
     console.log("API-booking request Error", error);
 

@@ -7,6 +7,8 @@ import {
 import { getMindbodyClient } from "@/src/services/auth";
 import { caclulateSlotAvailabilities } from "@/src/services/availabilities";
 
+const locationId = 1;
+
 /**
  * date: "YYYY-MM-DD" (recommended) or any ISO date string
  * NOTE: you MUST set MINDBODY_SESSION_TYPE_ID (or pass it in) for this to return slots.
@@ -137,34 +139,21 @@ export const createCustomer = async (data: CustomerFormValues) => {
 
 export const createBooking = async (data: CreateBookingInterface) => {
   try {
-    // const client = await getMindbodyClient(data.siteId);
-
-    const start = new Date(`${data.selectedDate}T${data.selectedSlot}:00`); // local
-    const end = new Date(start.getTime() + data.duration * 60_000);
+    const client = await getMindbodyClient(data.siteId);
 
     const payload = {
       ClientId: Number(data.customerId),
       BookOnline: true,
-      Appointments: [
-        {
-          StartDateTime: start.toISOString(),
-          EndDateTime: end.toISOString(),
-          SessionTypeID: data.treatmentId,
-          LocationId: data.siteId,
-          // StaffId: data.staffId,
-        },
-      ],
+      StartDateTime: data?.selectedSlot.duration.start,
+      EndDateTime: data?.selectedSlot.duration.end,
+      SessionTypeID: data.treatmentId,
+      LocationId: locationId,
+      StaffId: data.selectedSlot.staffId,
     };
 
-    console.log("Create booking payload", payload);
+    const res = await client.post("/appointment/addappointment", payload);
 
-    return null;
-
-    // const res = await client.post("/appointment/addappointment", payload);
-
-    // console.log("Booking response", res);
-
-    // return res?.data ?? null;
+    return res?.data ?? null;
   } catch (error) {
     console.log(
       "createBooking error:",
