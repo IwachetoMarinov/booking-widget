@@ -10,11 +10,14 @@ interface CalendarProps {
 
 const Calendar = ({ selectedDate, onChange }: CalendarProps) => {
   return (
-    <DatePicker
-      className="widget-datepicker"
-      selected={selectedDate}
-      onChange={(date: Date | null) => date && onChange(date)}
-    />
+    <div>
+      <p>Select a date</p>
+      <DatePicker
+        className="widget-datepicker"
+        selected={selectedDate}
+        onChange={(date: Date | null) => date && onChange(date)}
+      />
+    </div>
   );
 };
 
