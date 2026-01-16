@@ -6,11 +6,11 @@ import Slots from "@/src/app/components/Slots";
 import Calendar from "@/src/app/components/Calendar";
 import { useAppDispatch, useAppSelector } from "@/src/store/hooks";
 import {
-  setAvailabilities,
-  setSelectedSlot,
   resetSlice,
   setSiteId,
   setLoading,
+  setAvailabilities,
+  setSelectedSliceDate,
 } from "@/src/store/slices/availabilitySlice";
 import WidgetLoader from "@/src/app/components/WidgetLoader";
 
@@ -31,13 +31,12 @@ export default function HomePage({}: IProps) {
 
   const { loading, siteId } = useAppSelector((state) => state.availability);
 
-  console.log("Selected siteId:", siteId);
-
   const changeDate = async (date: Date, selectedSiteId?: number) => {
-    console.log("changeDate", date, service, duration, selectedSiteId);
-
     dispatch(resetSlice());
     dispatch(setLoading(true));
+
+    const formattedDate = dayjs(date).format("YYYY-MM-DD");
+    dispatch(setSelectedSliceDate(formattedDate));
     // Do POST request to fetch availability for selected date format "YYYY-MM-DD"
     const response = await fetch("/api/availability", {
       method: "POST",
@@ -45,7 +44,7 @@ export default function HomePage({}: IProps) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        date: dayjs(date).format("YYYY-MM-DD"),
+        date: formattedDate,
         sessionId: service,
         duration,
         siteId: selectedSiteId || siteId,
@@ -57,7 +56,6 @@ export default function HomePage({}: IProps) {
       return;
     }
 
-    // const response = await fetch(`/api/availability?date=${date.toISOString().split('T')[0]}&sessionId=${service}&duration=${duration}`);
     const data = await response.json();
 
     console.log("Response data:", data?.data);
@@ -70,6 +68,8 @@ export default function HomePage({}: IProps) {
   // Initial load
   React.useEffect(() => {
     changeDate(new Date());
+
+    dispatch(setSelectedSliceDate(dayjs(new Date()).format("YYYY-MM-DD")));
   }, []);
 
   return (
@@ -84,9 +84,7 @@ export default function HomePage({}: IProps) {
 
             dispatch(resetSlice());
             dispatch(setSiteId(id));
-            setTimeout(() => {
-              changeDate(new Date(), id);
-            }, 50);
+            changeDate(new Date(), id);
           }}
           defaultValue={siteOptions[0].id}
           className="mb-4 rounded border border-gray-300 p-2"
