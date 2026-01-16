@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/navigation";
+import { SlotAvailability } from "@/src/app/types";
 import { useAppSelector, useAppDispatch } from "@/src/store/hooks";
 import { setSelectedSlot } from "@/src/store/slices/availabilitySlice";
 
@@ -16,6 +17,20 @@ const Slots = ({ selectedSlotName }: IProps) => {
     (state) => state.availability
   );
 
+  const getSlotDurationDisplay = (slot: SlotAvailability | null) => {
+    if (!slot) return "";
+    const start = new Date(slot.duration.start);
+    const end = new Date(slot.duration.end);
+
+    return `${start.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    })} - ${end.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}`;
+  };
+
   return (
     <section className="my-6">
       <h2 className="mb-3 text-sm font-semibold text-slate-700">
@@ -25,11 +40,11 @@ const Slots = ({ selectedSlotName }: IProps) => {
       {availabilities && availabilities.length > 0 ? (
         <div>
           <ul className="grid grid-cols-3 gap-2 sm:grid-cols-4">
-            {availabilities.map((time) => (
-              <li key={time}>
+            {availabilities.map((item, index: number) => (
+              <li key={index}>
                 <button
                   type="button"
-                  onClick={() => dispatch(setSelectedSlot(time))}
+                  onClick={() => dispatch(setSelectedSlot(item))}
                   className={`
                     w-full rounded-lg px-2.5 py-1.5 text-xs font-medium
                     text-white
@@ -39,13 +54,13 @@ const Slots = ({ selectedSlotName }: IProps) => {
                     transition-all duration-150
                     shadow-sm hover:shadow cursor-pointer
                     ${
-                      selectedSlot === time
+                      selectedSlot === item
                         ? "ring-2 ring-emerald-400 from-emerald-700 to-sky-700 shadow-md scale-[0.98]"
                         : ""
                     }
                   `}
                 >
-                  {time}
+                  {getSlotDurationDisplay(item)}
                 </button>
               </li>
             ))}
@@ -54,7 +69,8 @@ const Slots = ({ selectedSlotName }: IProps) => {
           {selectedSlot && (
             <div>
               <p className="mt-4 text-sm text-slate-600">
-                Selected Slot: <strong>{selectedSlot}</strong>
+                Selected Slot:{" "}
+                <strong>{getSlotDurationDisplay(selectedSlot)}</strong>
               </p>
 
               {/* Create booking button */}

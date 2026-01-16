@@ -60,3 +60,11 @@ export interface CreateBookingInterface {
   selectedDate: string;
   duration: number;
 }
+
+export type SlotAvailability = {
+  staffId: number | string | undefined;
+  duration: {
+    start: string; // ISO string (UTC)
+    end: string; // ISO string (UTC)
+  };
+};
