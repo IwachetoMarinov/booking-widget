@@ -1,0 +1,152 @@
+{
+  "Client": {
+    "AppointmentGenderPreference": "None",
+    "BirthDate": "2026-01-15T13:38:11.829Z",
+    "Country": "string",
+    "CreationDate": "2026-01-15T13:38:11.829Z",
+    "CustomClientFields": [
+      {
+        "Value": "string",
+        "Id": 0,
+        "DataType": "string",
+        "Name": "string"
+      }
+    ],
+    "ClientCreditCard": {
+      "Address": "string",
+      "CardHolder": "string",
+      "CardNumber": "string",
+      "CardType": "string",
+      "City": "string",
+      "ExpMonth": "string",
+      "ExpYear": "string",
+      "LastFour": "string",
+      "PostalCode": "string",
+      "State": "string"
+    },
+    "ClientIndexes": [
+      {
+        "Id": 0,
+        "ValueId": 0
+      }
+    ],
+    "ClientRelationships": [
+      {
+        "RelatedClientId": "string",
+        "RelatedUniqueId": 0,
+        "Relationship": {
+          "Id": 0,
+          "RelationshipName1": "string",
+          "RelationshipName2": "string"
+        },
+        "RelationshipName": "string",
+        "Delete": true
+      }
+    ],
+    "FirstAppointmentDate": "2026-01-15T13:38:11.829Z",
+    "FirstClassDate": "2026-01-15T13:38:11.829Z",
+    "FirstName": "string",
+    "Id": "string",
+    "IsCompany": true,
+    "IsProspect": true,
+    "LastName": "string",
+    "Liability": {
+      "AgreementDate": "2026-01-15T13:38:11.829Z",
+      "IsReleased": true,
+      "ReleasedBy": 0
+    },
+    "LiabilityRelease": true,
+    "MembershipIcon": 0,
+    "MobileProvider": 0,
+    "Notes": "string",
+    "State": "string",
+    "UniqueId": 0,
+    "LastModifiedDateTime": "2026-01-15T13:38:11.829Z",
+    "RedAlert": "string",
+    "YellowAlert": "string",
+    "MiddleName": "string",
+    "ProspectStage": {
+      "Active": true,
+      "Description": "string",
+      "Id": 0
+    },
+    "Email": "string",
+    "MobilePhone": "string",
+    "HomePhone": "string",
+    "WorkPhone": "string",
+    "AccountBalance": 0,
+    "AddressLine1": "string",
+    "AddressLine2": "string",
+    "City": "string",
+    "PostalCode": "string",
+    "WorkExtension": "string",
+    "ReferredBy": "string",
+    "PhotoUrl": "string",
+    "EmergencyContactInfoName": "string",
+    "EmergencyContactInfoEmail": "string",
+    "EmergencyContactInfoPhone": "string",
+    "EmergencyContactInfoRelationship": "string",
+    "Gender": "string",
+    "LastFormulaNotes": "string",
+    "Active": true,
+    "SalesReps": [
+      {
+        "FirstName": "string",
+        "Id": 0,
+        "LastName": "string",
+        "SalesRepNumber": 0,
+        "SalesRepNumbers": [
+          0
+        ]
+      }
+    ],
+    "Status": "string",
+    "Action": "None",
+    "SendAccountEmails": true,
+    "SendAccountTexts": true,
+    "SendPromotionalEmails": true,
+    "SendPromotionalTexts": true,
+    "SendScheduleEmails": true,
+    "SendScheduleTexts": true,
+    "HomeLocation": {
+      "AdditionalImageURLs": [
+        "string"
+      ],
+      "Address": "string",
+      "Address2": "string",
+      "Amenities": [
+        {
+          "Id": 0,
+          "Name": "string"
+        }
+      ],
+      "BusinessDescription": "string",
+      "City": "string",
+      "Description": "string",
+      "HasClasses": true,
+      "Id": 0,
+      "Latitude": 0,
+      "Longitude": 0,
+      "Name": "string",
+      "Phone": "string",
+      "PhoneExtension": "string",
+      "PostalCode": "string",
+      "SiteID": 0,
+      "StateProvCode": "string",
+      "Tax1": 0,
+      "Tax2": 0,
+      "Tax3": 0,
+      "Tax4": 0,
+      "Tax5": 0,
+      "TotalNumberOfRatings": 0,
+      "AverageRating": 0,
+      "TotalNumberOfDeals": 0
+    },
+    "LockerNumber": "string",
+    "ClientType": {
+      "Id": 0,
+      "Name": "string"
+    }
+  }
+}
+

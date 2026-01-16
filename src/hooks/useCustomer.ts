@@ -1,7 +1,10 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { EMAIL_REGEX } from "@/src/constants";
 import { CustomerFormValues } from "@/src/app/types";
-import { CustomerFormErrors } from "../pages/CustomerPage";
+import { CustomerFormErrors } from "@/src/pages/CustomerPage";
+import { setLoading } from "@/src/store/slices/availabilitySlice";
+import { useAppSelector, useAppDispatch } from "@/src/store/hooks";
 
 const requiredFields = {
   firstName: true,
@@ -11,17 +14,29 @@ const requiredFields = {
 } as const;
 
 const useCustomer = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   // State to track touched fields and submission status
+  const { selectedSlot, treatmentId, siteId, loading } = useAppSelector(
+    (state) => state.availability
+  );
+
   const [touched, setTouched] = useState<
     Partial<Record<keyof CustomerFormValues, boolean>>
   >({});
+
   const [submitted, setSubmitted] = useState(false);
   const [values, setValues] = useState<CustomerFormValues>({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
+    siteId,
   });
+
+  useEffect(() => {
+    if (!selectedSlot) router.push("/");
+  }, [selectedSlot]);
 
   // Functions to manage touched and submitted states can be added here
   const validate = (v: CustomerFormValues): CustomerFormErrors => {
@@ -62,15 +77,55 @@ const useCustomer = () => {
     setTouched((prev) => ({ ...prev, [name]: true }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const redirectToHomepage = () => {
+    dispatch(setLoading(false));
+    router.push("/");
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+    dispatch(setLoading(true));
 
     const currentErrors = validate(values);
     if (Object.keys(currentErrors).length > 0) return;
 
     // Next step: search client by email, create if missing
     console.log("Customer form valid. Values:", values);
+
+    const response = await fetch("/api/customer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+
+    if (!response.ok) {
+      redirectToHomepage();
+      return;
+    }
+
+    const data = await response.json();
+    console.log("Customer API response data:", data);
+
+    const customerId = data?.customer?.Id;
+
+    if (customerId) {
+      console.log("Customer found/created:", customerId);
+      // TODO  - Create booking with customerId
+      const bookingResponse = await fetch("/api/booking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ customerId, selectedSlot, treatmentId, siteId }),
+      });
+
+      dispatch(setLoading(false));
+    } else {
+      redirectToHomepage();
+    }
   };
 
   return {
@@ -87,6 +142,8 @@ const useCustomer = () => {
     handleSubmit,
     values,
     setValues,
+    loading,
+    redirectToHomepage,
   };
 };
 

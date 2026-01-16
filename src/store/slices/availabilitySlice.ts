@@ -4,12 +4,18 @@ export interface RootInitialState {
   availabilities: string[] | null;
   selectedSlot: string | null;
   loading: boolean;
+  treatmentId: number;
+  duration: number;
+  siteId: number;
 }
 
 const rootInitialState: RootInitialState = {
   availabilities: null,
   selectedSlot: null,
-  loading: true,
+  loading: false,
+  treatmentId: 181,
+  duration: 90,
+  siteId: 659302,
 };
 
 export const availabilitySlice = createSlice({
@@ -23,10 +29,31 @@ export const availabilitySlice = createSlice({
     setSelectedSlot: (state, { payload }) => {
       state.selectedSlot = payload;
     },
-    resetSlice: () => rootInitialState,
+    setSiteId: (state, { payload }) => {
+      console.log("Setting siteId to:", payload);
+
+      state.siteId = payload;
+    },
+    setLoading: (state, { payload }) => {
+      state.loading = payload;
+    },
+    resetSlice: (state) => {
+      // state.siteId = rootInitialState.siteId;
+      state.availabilities = rootInitialState.availabilities;
+      state.selectedSlot = rootInitialState.selectedSlot;
+      state.loading = rootInitialState.loading;
+      state.treatmentId = rootInitialState.treatmentId;
+      state.duration = rootInitialState.duration;
+    },
   },
 });
 
-export const { setAvailabilities, setSelectedSlot, resetSlice } =
-  availabilitySlice.actions;
+export const {
+  setAvailabilities,
+  setSelectedSlot,
+  setSiteId,
+  resetSlice,
+  setLoading,
+} = availabilitySlice.actions;
+
 export default availabilitySlice.reducer;
