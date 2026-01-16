@@ -1,4 +1,4 @@
-import { SlotAvailability } from "@/src/app/types";
+import { BookingInterface, SlotAvailability } from "@/src/app/types";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface RootInitialState {
@@ -9,6 +9,7 @@ export interface RootInitialState {
   duration: number;
   siteId: number;
   selectedDate: string | null;
+  bookingDetails: BookingInterface | null;
 }
 
 const rootInitialState: RootInitialState = {
@@ -19,6 +20,7 @@ const rootInitialState: RootInitialState = {
   duration: 90,
   siteId: 659302,
   selectedDate: null,
+  bookingDetails: null,
 };
 
 export const availabilitySlice = createSlice({
@@ -39,9 +41,12 @@ export const availabilitySlice = createSlice({
       state.loading = payload;
     },
     setSelectedSliceDate: (state, { payload }) => {
-      console.log("Setting selectedDate to:", payload);
-
       state.selectedDate = payload;
+    },
+    setBookingDetails: (state, { payload }) => {
+      console.log("setBookingDetails payload:", payload);
+
+      state.bookingDetails = payload;
     },
     resetSlice: (state) => {
       // state.siteId = rootInitialState.siteId;
@@ -51,6 +56,7 @@ export const availabilitySlice = createSlice({
       state.treatmentId = rootInitialState.treatmentId;
       state.duration = rootInitialState.duration;
       state.selectedDate = rootInitialState.selectedDate;
+      state.bookingDetails = rootInitialState.bookingDetails;
     },
   },
 });
@@ -61,6 +67,7 @@ export const {
   setSiteId,
   resetSlice,
   setLoading,
+  setBookingDetails,
   setSelectedSliceDate,
 } = availabilitySlice.actions;
 

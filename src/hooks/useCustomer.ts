@@ -3,7 +3,10 @@ import { useRouter } from "next/navigation";
 import { EMAIL_REGEX } from "@/src/constants";
 import { CustomerFormValues } from "@/src/app/types";
 import { CustomerFormErrors } from "@/src/pages/CustomerPage";
-import { setLoading } from "@/src/store/slices/availabilitySlice";
+import {
+  setBookingDetails,
+  setLoading,
+} from "@/src/store/slices/availabilitySlice";
 import { useAppSelector, useAppDispatch } from "@/src/store/hooks";
 
 const requiredFields = {
@@ -127,6 +130,19 @@ const useCustomer = () => {
           duration,
         }),
       });
+
+      const bookingData = await bookingResponse.json();
+      console.log("Booking API response data:", bookingData);
+
+      if (bookingData?.error) {
+        // Handle booking error if needed
+
+        return redirectToHomepage();
+      }
+
+      // Redirect to homepage or confirmation page and set booking details in state
+      dispatch(setBookingDetails(bookingData?.Appointment || null));
+      router.push("/confirmation");
 
       dispatch(setLoading(false));
     } else {

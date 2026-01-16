@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import { IssueTokenResponse, TokenState } from "@/src/app/types";
 
@@ -83,7 +84,7 @@ export async function getMindbodyClient(
 
   const token = await getMindbodyAccessToken(siteIdParam);
 
-  console.log("Mindbody client token for SiteId", siteIdParam, ":", token);
+  // console.log("Mindbody client token for SiteId", siteIdParam, ":", token);
 
   return axios.create({
     baseURL: apiUrl!,

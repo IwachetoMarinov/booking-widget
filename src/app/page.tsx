@@ -1,6 +1,6 @@
 import HomePage from "@/src/pages/Homepage";
 // import { getMindbodyClient } from "@/src/services/auth";
-import { getAvailability, getSessionTypes } from "@/src/lib/mindbody";
+// import { getAvailability, getSessionTypes } from "@/src/lib/mindbody";
 
 export default async function Page() {
   // Get session types (optional)
