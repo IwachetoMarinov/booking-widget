@@ -17,9 +17,8 @@ const useCustomer = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   // State to track touched fields and submission status
-  const { selectedSlot, treatmentId, siteId, loading } = useAppSelector(
-    (state) => state.availability
-  );
+  const { selectedSlot, treatmentId, siteId, loading, duration, selectedDate } =
+    useAppSelector((state) => state.availability);
 
   const [touched, setTouched] = useState<
     Partial<Record<keyof CustomerFormValues, boolean>>
@@ -119,7 +118,14 @@ const useCustomer = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ customerId, selectedSlot, treatmentId, siteId }),
+        body: JSON.stringify({
+          customerId,
+          selectedSlot,
+          treatmentId,
+          siteId,
+          selectedDate,
+          duration,
+        }),
       });
 
       dispatch(setLoading(false));

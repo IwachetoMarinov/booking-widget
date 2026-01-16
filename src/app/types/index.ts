@@ -51,3 +51,12 @@ export type CustomerFormValues = {
   phone: string;
   siteId: number;
 };
+
+export interface CreateBookingInterface {
+  customerId: number;
+  selectedSlot: string;
+  treatmentId: number;
+  siteId: number;
+  selectedDate: string;
+  duration: number;
+}

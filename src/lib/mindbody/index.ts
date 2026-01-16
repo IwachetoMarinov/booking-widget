@@ -1,4 +1,8 @@
-import { AvailabilityInterface, CustomerFormValues } from "@/src/app/types";
+import {
+  AvailabilityInterface,
+  CreateBookingInterface,
+  CustomerFormValues,
+} from "@/src/app/types";
 import { getMindbodyClient } from "@/src/services/auth";
 import { caclulateSlotAvailabilities } from "@/src/services/availabilities";
 
@@ -17,10 +21,10 @@ export const getAvailability = async (
 
     const client = await getMindbodyClient(siteId);
 
-    client.interceptors.request.use((config) => {
-      console.log("Mindbody request SiteId:", config.headers?.SiteId);
-      return config;
-    });
+    // client.interceptors.request.use((config) => {
+    //   console.log("Mindbody request SiteId:", config.headers?.SiteId);
+    //   return config;
+    // });
 
     const start = new Date(`${date}T00:00:00.000Z`).toISOString();
     const end = new Date(`${date}T23:59:59.999Z`).toISOString();
@@ -35,6 +39,8 @@ export const getAvailability = async (
 
     const availabilities: AvailabilityInterface[] =
       res.data?.Availabilities ?? [];
+
+    console.log("availabilities:", availabilities);
 
     if (availabilities.length === 0) return null;
 
@@ -107,6 +113,45 @@ export const createCustomer = async (data: CustomerFormValues) => {
   } catch (error) {
     console.log(
       "createCustomer error:",
+      (error as any)?.response?.data || error
+    );
+    return null;
+  }
+};
+
+export const createBooking = async (data: CreateBookingInterface) => {
+  try {
+    // const client = await getMindbodyClient(data.siteId);
+
+    const start = new Date(`${data.selectedDate}T${data.selectedSlot}:00`); // local
+    const end = new Date(start.getTime() + data.duration * 60_000);
+
+    const payload = {
+      ClientId: Number(data.customerId),
+      BookOnline: true,
+      Appointments: [
+        {
+          StartDateTime: start.toISOString(),
+          EndDateTime: end.toISOString(),
+          SessionTypeID: data.treatmentId,
+          LocationId: data.siteId,
+          // StaffId: data.staffId,
+        },
+      ],
+    };
+
+    console.log("Create booking payload", payload);
+
+    return null;
+
+    // const res = await client.post("/appointment/addappointment", payload);
+
+    // console.log("Booking response", res);
+
+    // return res?.data ?? null;
+  } catch (error) {
+    console.log(
+      "createBooking error:",
       (error as any)?.response?.data || error
     );
     return null;
