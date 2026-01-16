@@ -87,13 +87,13 @@ const useCustomer = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    dispatch(setLoading(true));
 
     const currentErrors = validate(values);
     if (Object.keys(currentErrors).length > 0) return;
 
     // Next step: search client by email, create if missing
     console.log("Customer form valid. Values:", values);
+    dispatch(setLoading(true));
 
     const response = await fetch("/api/customer", {
       method: "POST",
