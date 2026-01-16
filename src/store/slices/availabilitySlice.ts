@@ -1,8 +1,9 @@
+import { SlotAvailability } from "@/src/app/types";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface RootInitialState {
-  availabilities: string[] | null;
-  selectedSlot: string | null;
+  availabilities: SlotAvailability[] | null;
+  selectedSlot: SlotAvailability | null;
   loading: boolean;
   treatmentId: number;
   duration: number;

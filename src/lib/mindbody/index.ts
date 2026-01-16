@@ -2,6 +2,7 @@ import {
   AvailabilityInterface,
   CreateBookingInterface,
   CustomerFormValues,
+  SlotAvailability,
 } from "@/src/app/types";
 import { getMindbodyClient } from "@/src/services/auth";
 import { caclulateSlotAvailabilities } from "@/src/services/availabilities";
@@ -15,7 +16,7 @@ export const getAvailability = async (
   sessionId: number,
   defaultTime: number = 90,
   siteId: number
-): Promise<string[] | null> => {
+): Promise<SlotAvailability[] | null> => {
   try {
     if (!date || !sessionId || !siteId) return null;
 
@@ -26,25 +27,40 @@ export const getAvailability = async (
     //   return config;
     // });
 
-    const start = new Date(`${date}T00:00:00.000Z`).toISOString();
-    const end = new Date(`${date}T23:59:59.999Z`).toISOString();
+    const start = `${date}T00:00:00`;
+    const end = `${date}T23:59:59.999`;
 
     const res = await client.get("/appointment/bookableitems", {
       params: {
-        "request.sessionTypeIds": sessionId,
-        "request.startDate": start,
-        "request.endDate": end,
+        sessionTypeIds: sessionId,
+        startDate: start,
+        endDate: end,
       },
+    });
+
+    console.log("Request params:", {
+      sessionTypeIds: sessionId,
+      startDate: start,
+      endDate: end,
     });
 
     const availabilities: AvailabilityInterface[] =
       res.data?.Availabilities ?? [];
 
-    console.log("availabilities:", availabilities);
+    console.log("availabilities:", availabilities?.length);
 
     if (availabilities.length === 0) return null;
 
-    const slots = caclulateSlotAvailabilities(availabilities, defaultTime);
+    const filteredAvailabilities = availabilities.filter((a) =>
+      a.StartDateTime.startsWith(date)
+    );
+
+    console.log("filteredAvailabilities:", filteredAvailabilities?.length);
+
+    const slots = caclulateSlotAvailabilities(
+      filteredAvailabilities,
+      defaultTime
+    );
 
     return slots;
   } catch (error) {

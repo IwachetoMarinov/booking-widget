@@ -19,9 +19,6 @@ const siteOptions = [
   { id: 788070, name: "Mindbody Mexico MX 147" },
 ];
 
-const service = 178; // Yoga Session
-const duration = 90;
-
 interface IProps {}
 
 export default function HomePage({}: IProps) {
@@ -29,7 +26,9 @@ export default function HomePage({}: IProps) {
 
   const [selectedDate, setSelectedDate] = React.useState<Date>(new Date());
 
-  const { loading, siteId } = useAppSelector((state) => state.availability);
+  const { loading, siteId, treatmentId, duration } = useAppSelector(
+    (state) => state.availability
+  );
 
   const changeDate = async (date: Date, selectedSiteId?: number) => {
     dispatch(resetSlice());
@@ -45,7 +44,7 @@ export default function HomePage({}: IProps) {
       },
       body: JSON.stringify({
         date: formattedDate,
-        sessionId: service,
+        sessionId: treatmentId,
         duration,
         siteId: selectedSiteId || siteId,
       }),
