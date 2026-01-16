@@ -49,4 +49,5 @@ export type CustomerFormValues = {
   lastName: string;
   email: string;
   phone: string;
+  siteId: number;
 };

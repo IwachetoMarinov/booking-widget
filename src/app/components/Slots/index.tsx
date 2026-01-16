@@ -3,7 +3,11 @@ import { useRouter } from "next/navigation";
 import { useAppSelector, useAppDispatch } from "@/src/store/hooks";
 import { setSelectedSlot } from "@/src/store/slices/availabilitySlice";
 
-const Slots = () => {
+interface IProps {
+  selectedSlotName: string;
+}
+
+const Slots = ({ selectedSlotName }: IProps) => {
   const router = useRouter();
 
   const dispatch = useAppDispatch();
@@ -66,7 +70,7 @@ const Slots = () => {
         </div>
       ) : (
         <p className="text-sm text-slate-500">
-          No available slots for the selected date.
+          No available slots for the selected date. For store {selectedSlotName}
         </p>
       )}
     </section>
