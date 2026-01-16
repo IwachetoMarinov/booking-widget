@@ -92,7 +92,6 @@ const useCustomer = () => {
     if (Object.keys(currentErrors).length > 0) return;
 
     // Next step: search client by email, create if missing
-    console.log("Customer form valid. Values:", values);
     dispatch(setLoading(true));
 
     const response = await fetch("/api/customer", {
@@ -109,13 +108,10 @@ const useCustomer = () => {
     }
 
     const data = await response.json();
-    console.log("Customer API response data:", data);
 
     const customerId = data?.customer?.Id;
 
     if (customerId) {
-      console.log("Customer found/created:", customerId);
-      // TODO  - Create booking with customerId
       const bookingResponse = await fetch("/api/booking", {
         method: "POST",
         headers: {
@@ -132,11 +128,9 @@ const useCustomer = () => {
       });
 
       const bookingData = await bookingResponse.json();
-      console.log("Booking API response data:", bookingData);
 
       if (bookingData?.error) {
         // Handle booking error if needed
-
         return redirectToHomepage();
       }
 

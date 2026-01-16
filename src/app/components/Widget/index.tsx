@@ -24,10 +24,30 @@ const Widget = () => {
     return () => window.removeEventListener("message", onMessage);
   }, []);
 
+  //   Example script for WP and Rendered HTML pages
+
+  //   <script>
+  //   (function () {
+  //     var WIDGET_ORIGIN = "https://elevatione-booking-widget.netlify.app";
+
+  //     window.addEventListener("message", function (event) {
+  //       if (event.origin !== WIDGET_ORIGIN) return;
+
+  //       var data = event.data;
+  //       if (!data || typeof data !== "object") return;
+
+  //       if (data.type === "WIDGET_REDIRECT" && typeof data.url === "string") {
+  //         window.location.assign(data.url);
+  //       }
+  //     });
+  //   })();
+  // </script>
+
   return (
     <section>
       <div>
         <h1>Embeded IFRAME</h1>
+
         {/* <iframe
           width="475"
           height="660"

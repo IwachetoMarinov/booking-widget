@@ -54,8 +54,6 @@ export default function HomePage() {
 
     const data = await response.json();
 
-    console.log("Response data:", data?.data);
-
     dispatch(setAvailabilities(data?.data || []));
     setSelectedDate(date);
     dispatch(setLoading(false));
@@ -71,9 +69,12 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-white  ">
       <div className="mx-auto max-w-2xl rounded-xl border border-gray-200 shadow-lg shadow-black/10 p-4">
-        <h1 className="text-xl font-semibold">Elevatione</h1>
+        <h1 className="text-xl font-semibold my-2 text-center text-gray-500">
+          Elevatione booking Widget
+        </h1>
 
         {/* Select option with siteIds */}
+        <p>Select Site:</p>
         <select
           onChange={(e) => {
             const id = Number(e.target.value);
@@ -83,16 +84,16 @@ export default function HomePage() {
             changeDate(new Date(), id);
           }}
           defaultValue={siteOptions[0].id}
-          className="mb-4 rounded border border-gray-300 p-2"
+          className="mb-4 rounded border border-gray-300 p-1.5"
         >
           {siteOptions.map((option) => (
-            <option key={option.id} value={option.id}>
+            <option key={option.id} value={option.id} className="text-sm">
               {option.name}
             </option>
           ))}
         </select>
 
-        <div className="mt-6">
+        <div className="mt-1">
           <Calendar
             selectedDate={selectedDate}
             onChange={(date) => changeDate(date)}
