@@ -1,4 +1,4 @@
-import ConfirmationPage from "@/src/pages/ConfirmationPage";
+import ConfirmationPage from "@/src/views/ConfirmationPage";
 
 export default async function Confirmation() {
   return (

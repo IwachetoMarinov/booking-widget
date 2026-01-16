@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import dayjs from "dayjs";
 import Slots from "@/src/app/components/Slots";

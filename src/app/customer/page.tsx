@@ -1,4 +1,4 @@
-import CustomerPage from "@/src/pages/CustomerPage";
+import CustomerPage from "@/src/views/CustomerPage";
 
 export default async function Customer() {
   return (
