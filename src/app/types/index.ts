@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export type IssueTokenResponse = {
   AccessToken?: string;
   access_token?: string;

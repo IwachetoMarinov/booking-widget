@@ -19,9 +19,7 @@ const siteOptions = [
   { id: 788070, name: "Mindbody Mexico MX 147" },
 ];
 
-interface IProps {}
-
-export default function HomePage({}: IProps) {
+export default function HomePage() {
   const dispatch = useAppDispatch();
 
   const [selectedDate, setSelectedDate] = React.useState<Date>(new Date());
