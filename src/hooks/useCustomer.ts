@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { EMAIL_REGEX } from "@/src/constants";
 import { CustomerFormValues } from "@/src/app/types";
-import { CustomerFormErrors } from "@/src/pages/CustomerPage";
+import { CustomerFormErrors } from "@/src/views/CustomerPage";
 import {
   setBookingDetails,
   setLoading,

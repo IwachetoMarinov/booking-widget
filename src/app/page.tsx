@@ -1,4 +1,4 @@
-import HomePage from "@/src/pages/Homepage";
+import HomePage from "@/src/views/Homepage";
 // import { getMindbodyClient } from "@/src/services/auth";
 // import { getAvailability, getSessionTypes } from "@/src/lib/mindbody";
 

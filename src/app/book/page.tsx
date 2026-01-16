@@ -1,4 +1,4 @@
-import Bookpage from "@/src/pages/Bookpage";
+import Bookpage from "@/src/views/Bookpage";
 
 export default async function BookPage() {
   return (
