@@ -27,6 +27,8 @@ const useCustomer = () => {
     Partial<Record<keyof CustomerFormValues, boolean>>
   >({});
 
+  const [bookingError, setBookingError] = useState<string | null>(null);
+
   const [submitted, setSubmitted] = useState(false);
   const [values, setValues] = useState<CustomerFormValues>({
     firstName: "",
@@ -71,7 +73,7 @@ const useCustomer = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setValues((prev) => ({ ...prev, [name]: value } as CustomerFormValues));
+    setValues((prev) => ({ ...prev, [name]: value }) as CustomerFormValues);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -80,8 +82,10 @@ const useCustomer = () => {
   };
 
   const redirectToHomepage = () => {
-    dispatch(setLoading(false));
-    router.push("/");
+    setTimeout(() => {
+      dispatch(setLoading(false));
+      router.push("/");
+    }, 2000);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -103,6 +107,8 @@ const useCustomer = () => {
     });
 
     if (!response.ok) {
+      dispatch(setLoading(false));
+      setBookingError("Failed to fetch or create customer data. Please try again.");
       redirectToHomepage();
       return;
     }
@@ -131,6 +137,8 @@ const useCustomer = () => {
 
       if (bookingData?.error) {
         // Handle booking error if needed
+        dispatch(setLoading(false));
+        setBookingError("Booking failed. Please try again.");
         return redirectToHomepage();
       }
 
@@ -145,6 +153,7 @@ const useCustomer = () => {
   };
 
   return {
+    bookingError,
     requiredFields,
     touched,
     setTouched,
