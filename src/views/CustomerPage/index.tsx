@@ -19,6 +19,7 @@ const CustomerPage = () => {
     values,
     loading,
     requiredFields,
+    bookingError,
     redirectToHomepage,
   } = useCustomer();
 
@@ -60,6 +61,11 @@ const CustomerPage = () => {
           <WidgetLoader />
         ) : (
           <form onSubmit={handleSubmit} noValidate className="space-y-1">
+            {bookingError && (
+              <div className="mb-4 text-red-600 font-semibold text-center">
+                {bookingError}
+              </div>
+            )}
             <InputField
               label="First name"
               name="firstName"
