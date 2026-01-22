@@ -24,7 +24,7 @@ export default function HomePage() {
   const [selectedDate, setSelectedDate] = React.useState<Date>(new Date());
 
   const { loading, siteId, treatmentId, duration } = useAppSelector(
-    (state) => state.availability
+    (state) => state.availability,
   );
 
   const changeDate = async (date: Date, selectedSiteId?: number) => {
@@ -74,7 +74,7 @@ export default function HomePage() {
         </h1>
 
         {/* Select option with siteIds */}
-        <p>Select Site:</p>
+        {/* <p>Select Site:</p>
         <select
           onChange={(e) => {
             const id = Number(e.target.value);
@@ -91,7 +91,7 @@ export default function HomePage() {
               {option.name}
             </option>
           ))}
-        </select>
+        </select> */}
 
         <div className="mt-1">
           <Calendar
