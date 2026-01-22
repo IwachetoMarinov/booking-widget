@@ -1,5 +1,5 @@
-import { BookingInterface, SlotAvailability } from "@/src/app/types";
 import { createSlice } from "@reduxjs/toolkit";
+import { BookingInterface, SlotAvailability } from "@/src/app/types";
 
 export interface RootInitialState {
   availabilities: SlotAvailability[] | null;
@@ -44,8 +44,6 @@ export const availabilitySlice = createSlice({
       state.selectedDate = payload;
     },
     setBookingDetails: (state, { payload }) => {
-      console.log("setBookingDetails payload:", payload);
-
       state.bookingDetails = payload;
     },
     resetSlice: (state) => {

@@ -14,7 +14,7 @@ const Slots = ({ selectedSlotName }: IProps) => {
   const dispatch = useAppDispatch();
 
   const { availabilities, selectedSlot } = useAppSelector(
-    (state) => state.availability
+    (state) => state.availability,
   );
 
   const getSlotDurationDisplay = (slot: SlotAvailability | null) => {
@@ -46,17 +46,11 @@ const Slots = ({ selectedSlotName }: IProps) => {
                   type="button"
                   onClick={() => dispatch(setSelectedSlot(item))}
                   className={`
-                    w-full rounded-lg px-2.5 py-1.5 text-xs font-medium
-                    text-white
-                    bg-gradient-to-r from-sky-300 to-emerald-500
-                    hover:from-sky-400 hover:to-emerald-500
-                    active:scale-95
-                    transition-all duration-150
-                    shadow-sm hover:shadow cursor-pointer
+                    w-full rounded-lg px-2.5 py-1.5 text-xs font-medium active:scale-95 transition-all duration-150 shadow-sm hover:shadow cursor-pointer
                     ${
                       selectedSlot === item
-                        ? "ring-2 ring-emerald-400 from-emerald-700 to-sky-700 shadow-md scale-[0.98]"
-                        : ""
+                        ? "bg-white text-black border border-gray-300 hover:bg-gray-100"
+                        : "bg-black text-white border border-transparent hover:bg-gray-800"
                     }
                   `}
                 >
@@ -77,7 +71,7 @@ const Slots = ({ selectedSlotName }: IProps) => {
               <button
                 type="button"
                 onClick={() => router.push("/customer")}
-                className="mt-3 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 active:scale-95 transition-all duration-150 shadow cursor-pointer"
+                className="mt-3 rounded-lg bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 active:scale-95 transition-all duration-150 shadow cursor-pointer"
               >
                 Proceed to Book
               </button>

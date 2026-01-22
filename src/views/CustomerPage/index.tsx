@@ -33,8 +33,25 @@ const CustomerPage = () => {
           </p>
           {/* Back button can be added here if needed */}
           <div className="flex justify-end my-2">
-            <button className="cursor-pointer" onClick={redirectToHomepage}>
-              Back
+            <button
+              onClick={redirectToHomepage}
+              className="flex items-center gap-.5 cursor-pointer text-gray-500 hover:text-black transition"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              <span>Back</span>
             </button>
           </div>
         </div>

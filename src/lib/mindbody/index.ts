@@ -41,16 +41,8 @@ export const getAvailability = async (
       },
     });
 
-    console.log("Request params:", {
-      sessionTypeIds: sessionId,
-      startDate: start,
-      endDate: end,
-    });
-
     const availabilities: AvailabilityInterface[] =
       res.data?.Availabilities ?? [];
-
-    console.log("availabilities:", availabilities?.length);
 
     if (availabilities.length === 0) return null;
 
@@ -58,16 +50,13 @@ export const getAvailability = async (
       a.StartDateTime.startsWith(date)
     );
 
-    console.log("filteredAvailabilities:", filteredAvailabilities?.length);
-
     const slots = caclulateSlotAvailabilities(
       filteredAvailabilities,
       defaultTime
     );
 
     return slots;
-  } catch (error) {
-    console.log("getAvailability error:", error);
+  } catch {
     return null;
   }
 };
@@ -79,8 +68,7 @@ export const getSessionTypes = async () => {
     const res = await client.get("/site/sessiontypes");
 
     return res.data ?? null;
-  } catch (error) {
-    console.log("getSessionTypes error:", error);
+  } catch {
     return null;
   }
 };

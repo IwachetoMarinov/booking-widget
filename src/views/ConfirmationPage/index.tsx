@@ -8,7 +8,6 @@ const ConfirmationPage = () => {
   const { bookingDetails } = useAppSelector((state) => state.availability);
   const router = useRouter();
 
-  console.log("ConfirmationPage", bookingDetails);
   useEffect(() => {
     // if (!bookingDetails) router.push("/");
   }, [bookingDetails, router]);

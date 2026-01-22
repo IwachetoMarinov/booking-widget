@@ -33,16 +33,13 @@ export async function POST(request: Request) {
         phone,
         siteId,
       });
-      console.log("Created new customer", newCustomer);
       customer = newCustomer;
     }
 
     return new Response(JSON.stringify({ customer }), {
       status: 200,
     });
-  } catch (error) {
-    console.log("API->customer request Error", error);
-
+  } catch {
     return new Response(JSON.stringify({ error: "Internal Server Error" }), {
       status: 500,
     });
