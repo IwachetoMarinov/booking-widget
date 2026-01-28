@@ -28,38 +28,38 @@ const ConfirmationPage = () => {
       <div className="flex items-center justify-center bg-gray-50 p-6">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-6 space-y-4">
           <h1 className="text-2xl font-semibold text-green-600">
-            Booking Confirmed
+            Reserva confirmada
           </h1>
 
           <div className="space-y-2 text-gray-700">
             <p>
-              <strong>Status:</strong> {bookingDetails?.Status}
+              <strong>Estado:</strong> {bookingDetails?.Status}
             </p>
             <p>
-              <strong>Date:</strong>{" "}
+              <strong>Fecha:</strong>{" "}
               {dayjs(bookingDetails?.StartDateTime).format(
                 "dddd, MMMM D, YYYY"
               )}
             </p>
             <p>
-              <strong>Time:</strong>{" "}
+              <strong>Hora:</strong>{" "}
               {dayjs(bookingDetails?.StartDateTime).format("HH:mm")} –{" "}
               {dayjs(bookingDetails?.EndDateTime).format("HH:mm")}
             </p>
             <p>
-              <strong>Duration:</strong> {bookingDetails?.Duration} minutes
+              <strong>Duración:</strong> {bookingDetails?.Duration} minutos
             </p>
             <p>
-              <strong>Session Type ID:</strong> {bookingDetails?.SessionTypeId}
+              <strong>ID del tipo de sesión:</strong> {bookingDetails?.SessionTypeId}
             </p>
             <p>
-              <strong>Location ID:</strong> {bookingDetails?.LocationId}
+              <strong>ID de la ubicación:</strong> {bookingDetails?.LocationId}
             </p>
             <p>
-              <strong>Staff ID:</strong> {bookingDetails?.StaffId}
+              <strong>ID del personal:</strong> {bookingDetails?.StaffId}
             </p>
             <p>
-              <strong>Client ID:</strong> {bookingDetails?.ClientId}
+              <strong>ID del cliente:</strong> {bookingDetails?.ClientId}
             </p>
           </div>
 
@@ -68,7 +68,7 @@ const ConfirmationPage = () => {
             onClick={redirectParrentPage}
             className="mt-2 w-full rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300 disabled:opacity-60 cursor-pointer"
           >
-            Redirect Parent
+            Redirigir al padre
           </button>
         </div>
       </div>

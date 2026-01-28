@@ -13,7 +13,7 @@ const requiredFields = {
   firstName: true,
   lastName: true,
   email: true,
-  phone: false,
+  phone: true,
 } as const;
 
 const useCustomer = () => {
@@ -47,20 +47,23 @@ const useCustomer = () => {
     const errors: CustomerFormErrors = {};
 
     if (requiredFields.firstName && v.firstName.trim().length === 0) {
-      errors.firstName = "First name is required.";
+      errors.firstName = "El nombre es obligatorio.";
     }
     if (requiredFields.lastName && v.lastName.trim().length === 0) {
-      errors.lastName = "Last name is required.";
+      errors.lastName = "El apellido es obligatorio.";
     }
     if (requiredFields.email && v.email.trim().length === 0) {
-      errors.email = "Email is required.";
+      errors.email = "El correo electrónico es obligatorio.";
     } else if (v.email.trim().length > 0 && !EMAIL_REGEX.test(v.email.trim())) {
-      errors.email = "Please enter a valid email address.";
+      errors.email = "Por favor, introduce una dirección de correo electrónico válida.";
+    } 
+    if(requiredFields.phone && v.phone.trim().length === 0) {
+      errors.phone = "El número de teléfono es obligatorio.";
     }
 
     if (v.phone.trim().length > 0) {
       const digits = v.phone.replace(/[^\d+]/g, "");
-      if (digits.length < 7) errors.phone = "Phone number looks too short.";
+      if (digits.length < 7) errors.phone = "El número de teléfono parece demasiado corto.";
     }
 
     return errors;
@@ -108,7 +111,7 @@ const useCustomer = () => {
 
     if (!response.ok) {
       dispatch(setLoading(false));
-      setBookingError("Failed to fetch or create customer data. Please try again.");
+      setBookingError("Error al obtener o crear los datos del cliente. Por favor, inténtalo de nuevo.");
       redirectToHomepage();
       return;
     }
@@ -138,7 +141,7 @@ const useCustomer = () => {
       if (bookingData?.error) {
         // Handle booking error if needed
         dispatch(setLoading(false));
-        setBookingError("Booking failed. Please try again.");
+        setBookingError("La reserva falló. Por favor, inténtalo de nuevo.");
         return redirectToHomepage();
       }
 

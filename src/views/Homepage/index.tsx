@@ -70,7 +70,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white  ">
       <div className="mx-auto max-w-2xl rounded-xl border border-gray-200 shadow-lg shadow-black/10 p-4">
         <h1 className="text-xl font-semibold my-2 text-center text-gray-500">
-          Elevatione booking Widget
+          Widget de reservas de Elevatione
         </h1>
 
         {/* Select option with siteIds */}

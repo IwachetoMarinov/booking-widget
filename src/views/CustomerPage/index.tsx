@@ -27,10 +27,10 @@ const CustomerPage = () => {
     <div className="mx-auto max-w-2xl rounded-xl border border-gray-200 shadow-lg shadow-black/10 p-4">
       <div className="mx-auto w-full max-w-xl p-4">
         <div className="mb-4">
-          <h2 className="text-xl font-semibold text-slate-900">Customer</h2>
+          <h2 className="text-xl font-semibold text-slate-900">Cliente</h2>
           <p className="mt-1 text-sm text-slate-600">
-            Enter customer details. We’ll search first, and create the client if
-            not found.
+            Ingresa los datos del cliente. Primero realizaremos una búsqueda y,
+            si no se encuentra, crearemos el cliente.
           </p>
           {/* Back button can be added here if needed */}
           <div className="flex justify-end my-2">
@@ -52,7 +52,7 @@ const CustomerPage = () => {
                   d="M15 19l-7-7 7-7"
                 />
               </svg>
-              <span>Back</span>
+              <span>Atrás</span>
             </button>
           </div>
         </div>
@@ -67,7 +67,7 @@ const CustomerPage = () => {
               </div>
             )}
             <InputField
-              label="First name"
+              label="Nombre"
               name="firstName"
               value={values.firstName}
               onChange={handleChange}
@@ -78,7 +78,7 @@ const CustomerPage = () => {
             />
 
             <InputField
-              label="Last name"
+              label="Apellido"
               name="lastName"
               value={values.lastName}
               onChange={handleChange}
@@ -89,7 +89,7 @@ const CustomerPage = () => {
             />
 
             <InputField
-              label="Email"
+              label="Correo electrónico"
               name="email"
               value={values.email}
               onChange={handleChange}
@@ -103,7 +103,7 @@ const CustomerPage = () => {
             />
 
             <InputField
-              label="Phone (optional)"
+              label="Teléfono (opcional)"
               name="phone"
               value={values.phone}
               onChange={handleChange}
@@ -120,7 +120,7 @@ const CustomerPage = () => {
               type="submit"
               className="mt-2 w-full rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300 disabled:opacity-60 cursor-pointer"
             >
-              Continue
+              Continuar
             </button>
           </form>
         )}
