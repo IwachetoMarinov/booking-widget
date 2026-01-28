@@ -103,7 +103,7 @@ const CustomerPage = () => {
             />
 
             <InputField
-              label="Teléfono (opcional)"
+              label="Teléfono"
               name="phone"
               value={values.phone}
               onChange={handleChange}

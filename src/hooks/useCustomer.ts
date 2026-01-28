@@ -55,15 +55,17 @@ const useCustomer = () => {
     if (requiredFields.email && v.email.trim().length === 0) {
       errors.email = "El correo electrónico es obligatorio.";
     } else if (v.email.trim().length > 0 && !EMAIL_REGEX.test(v.email.trim())) {
-      errors.email = "Por favor, introduce una dirección de correo electrónico válida.";
-    } 
-    if(requiredFields.phone && v.phone.trim().length === 0) {
+      errors.email =
+        "Por favor, introduce una dirección de correo electrónico válida.";
+    }
+    if (requiredFields.phone && v.phone.trim().length === 0) {
       errors.phone = "El número de teléfono es obligatorio.";
     }
 
     if (v.phone.trim().length > 0) {
       const digits = v.phone.replace(/[^\d+]/g, "");
-      if (digits.length < 7) errors.phone = "El número de teléfono parece demasiado corto.";
+      if (digits.length < 7)
+        errors.phone = "El número de teléfono parece demasiado corto.";
     }
 
     return errors;
@@ -91,6 +93,18 @@ const useCustomer = () => {
     }, 2000);
   };
 
+  const redirectParentPage = () => {
+    console.log("Redirecting parent page with message");
+    window.parent.postMessage(
+      {
+        type: "WIDGET_REDIRECT",
+        url: "",
+      },
+      "*",
+    );
+    window.close();
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
@@ -111,7 +125,9 @@ const useCustomer = () => {
 
     if (!response.ok) {
       dispatch(setLoading(false));
-      setBookingError("Error al obtener o crear los datos del cliente. Por favor, inténtalo de nuevo.");
+      setBookingError(
+        "Error al obtener o crear los datos del cliente. Por favor, inténtalo de nuevo.",
+      );
       redirectToHomepage();
       return;
     }
@@ -147,7 +163,8 @@ const useCustomer = () => {
 
       // Redirect to homepage or confirmation page and set booking details in state
       dispatch(setBookingDetails(bookingData?.Appointment || null));
-      router.push("/confirmation");
+      // router.push("/confirmation");
+      redirectParentPage();
 
       dispatch(setLoading(false));
     } else {
