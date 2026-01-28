@@ -17,7 +17,7 @@ export async function POST(request: Request) {
         JSON.stringify({
           error: "Missing email, firstName, lastName, or siteId",
         }),
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -33,7 +33,8 @@ export async function POST(request: Request) {
         phone,
         siteId,
       });
-      customer = newCustomer;
+
+      customer = newCustomer?.Client;
     }
 
     return new Response(JSON.stringify({ customer }), {
