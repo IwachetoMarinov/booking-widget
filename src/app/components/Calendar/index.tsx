@@ -11,7 +11,7 @@ interface CalendarProps {
 const Calendar = ({ selectedDate, onChange }: CalendarProps) => {
   return (
     <div>
-      <p>Select a date</p>
+      <p>Selecciona una fecha</p>
       <DatePicker
         className="widget-datepicker"
         selected={selectedDate}

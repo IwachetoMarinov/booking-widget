@@ -34,7 +34,7 @@ const Slots = ({ selectedSlotName }: IProps) => {
   return (
     <section className="my-6">
       <h2 className="mb-3 text-sm font-semibold text-slate-700">
-        Available Slots
+        Horarios disponibles
       </h2>
 
       {availabilities && availabilities.length > 0 ? (
@@ -63,7 +63,7 @@ const Slots = ({ selectedSlotName }: IProps) => {
           {selectedSlot && (
             <div>
               <p className="mt-4 text-sm text-slate-600">
-                Selected Slot:{" "}
+                Horario seleccionado:{" "}
                 <strong>{getSlotDurationDisplay(selectedSlot)}</strong>
               </p>
 
@@ -73,14 +73,15 @@ const Slots = ({ selectedSlotName }: IProps) => {
                 onClick={() => router.push("/customer")}
                 className="mt-3 rounded-lg bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 active:scale-95 transition-all duration-150 shadow cursor-pointer"
               >
-                Proceed to Book
+                Proceder a reservar
               </button>
             </div>
           )}
         </div>
       ) : (
         <p className="text-sm text-slate-500">
-          No available slots for the selected date. For store {selectedSlotName}
+          No hay horarios disponibles para la fecha seleccionada. Para la tienda{" "}
+          {selectedSlotName}
         </p>
       )}
     </section>
