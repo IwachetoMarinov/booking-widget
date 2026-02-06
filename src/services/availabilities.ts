@@ -1,8 +1,14 @@
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import { AvailabilityInterface, SlotAvailability } from "@/src/app/types";
 
 dayjs.extend(isSameOrBefore);
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+const MEX_TZ = "America/Mexico_City";
 
 export const caclulateSlotAvailabilities = (
   availabilities: AvailabilityInterface[],
@@ -51,16 +57,22 @@ export const caclulateSlotAvailabilities = (
       }
     }
 
+    // slots.sort(
+    //   (x, y) =>
+    //     dayjs(x.duration.start).valueOf() - dayjs(y.duration.start).valueOf(),
+    // );
+
     slots.sort(
       (x, y) =>
-        dayjs(x.duration.start).valueOf() - dayjs(y.duration.start).valueOf(),
+        dayjs.tz(x.duration.start, MEX_TZ).valueOf() -
+        dayjs.tz(y.duration.start, MEX_TZ).valueOf(),
     );
 
     // Filter slots to show only slots after 1 hour from now
-    const nowPlusOneHour = dayjs().add(1, "hour");
+    const nowPlusOneHour = dayjs().tz(MEX_TZ).add(1, "hour");
 
     const filteredSlots = slots.filter((slot) =>
-      dayjs(slot.duration.start).isAfter(nowPlusOneHour),
+      dayjs.tz(slot.duration.start, MEX_TZ).isAfter(nowPlusOneHour),
     );
 
     return filteredSlots;
