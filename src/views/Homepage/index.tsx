@@ -6,7 +6,6 @@ import Calendar from "@/src/app/components/Calendar";
 import { useAppDispatch, useAppSelector } from "@/src/store/hooks";
 import {
   resetSlice,
-  setSiteId,
   setLoading,
   setAvailabilities,
   setSelectedSliceDate,

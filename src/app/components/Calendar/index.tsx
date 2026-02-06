@@ -9,12 +9,20 @@ interface CalendarProps {
 }
 
 const Calendar = ({ selectedDate, onChange }: CalendarProps) => {
+  const minDate = new Date();
+
+  // Add only up to 8 days to the current date
+  const maxDate = new Date();
+  maxDate.setDate(maxDate.getDate() + 8);
+
   return (
     <div>
       <p>Selecciona una fecha</p>
       <DatePicker
-        className="widget-datepicker"
+        minDate={minDate}
+        maxDate={maxDate}
         selected={selectedDate}
+        className="widget-datepicker"
         onChange={(date: Date | null) => date && onChange(date)}
       />
     </div>

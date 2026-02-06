@@ -6,7 +6,7 @@ dayjs.extend(isSameOrBefore);
 
 export const caclulateSlotAvailabilities = (
   availabilities: AvailabilityInterface[],
-  duration: number = 90
+  duration: number = 90,
 ): SlotAvailability[] => {
   try {
     if (!availabilities?.length) return [];
@@ -18,7 +18,6 @@ export const caclulateSlotAvailabilities = (
     //     end: a.EndDateTime,
     //   };
     // });
-
     // console.log("mappedAvailabilities:", mappedAvailabilities);
 
     const seenHours = new Set<string>();
@@ -54,10 +53,17 @@ export const caclulateSlotAvailabilities = (
 
     slots.sort(
       (x, y) =>
-        dayjs(x.duration.start).valueOf() - dayjs(y.duration.start).valueOf()
+        dayjs(x.duration.start).valueOf() - dayjs(y.duration.start).valueOf(),
     );
 
-    return slots;
+    // Filter slots to show only slots after 1 hour from now
+    const nowPlusOneHour = dayjs().add(1, "hour");
+
+    const filteredSlots = slots.filter((slot) =>
+      dayjs(slot.duration.start).isAfter(nowPlusOneHour),
+    );
+
+    return filteredSlots;
   } catch (e) {
     console.log("Error in caclulateSlotAvailabilities:", e);
     return [];

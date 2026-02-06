@@ -94,7 +94,6 @@ const useCustomer = () => {
   };
 
   const redirectParentPage = () => {
-    console.log("Redirecting parent page with message");
     window.parent.postMessage(
       {
         type: "WIDGET_REDIRECT",
@@ -123,10 +122,6 @@ const useCustomer = () => {
       body: JSON.stringify(values),
     });
 
-    // console.log("Customer response:", response);
-
-    // return;
-
     if (!response.ok) {
       dispatch(setLoading(false));
       setBookingError(
@@ -137,8 +132,6 @@ const useCustomer = () => {
     }
 
     const data = await response.json();
-
-    // console.log("Data:", data?.customer);
 
     const customerId = data?.customer?.Id;
 
