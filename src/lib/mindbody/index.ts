@@ -18,7 +18,7 @@ export const getAvailability = async (
   date: string | null | undefined,
   sessionId: number,
   defaultTime: number = 90,
-  siteId: number
+  siteId: number,
 ): Promise<SlotAvailability[] | null> => {
   try {
     if (!date || !sessionId || !siteId) return null;
@@ -47,12 +47,12 @@ export const getAvailability = async (
     if (availabilities.length === 0) return null;
 
     const filteredAvailabilities = availabilities.filter((a) =>
-      a.StartDateTime.startsWith(date)
+      a.StartDateTime.startsWith(date),
     );
 
     const slots = caclulateSlotAvailabilities(
       filteredAvailabilities,
-      defaultTime
+      defaultTime,
     );
 
     return slots;
@@ -93,7 +93,7 @@ export const findCustomerByEmail = async (email: string, siteId: number) => {
     const exactMatches = clients.filter(
       (c: any) =>
         typeof c.Email === "string" &&
-        c.Email.trim().toLowerCase() === normalizedEmail
+        c.Email.trim().toLowerCase() === normalizedEmail,
     );
 
     return exactMatches.length > 0 ? exactMatches[0] : null;
@@ -120,7 +120,7 @@ export const createCustomer = async (data: CustomerFormValues) => {
   } catch (error) {
     console.log(
       "createCustomer error:",
-      (error as any)?.response?.data || error
+      (error as any)?.response?.data || error,
     );
     return null;
   }
@@ -146,7 +146,7 @@ export const createBooking = async (data: CreateBookingInterface) => {
   } catch (error) {
     console.log(
       "createBooking error:",
-      (error as any)?.response?.data || error
+      (error as any)?.response?.data || error,
     );
     return null;
   }
